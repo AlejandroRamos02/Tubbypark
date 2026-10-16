@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TubbyPark | Estacionamiento colaborativo en Puebla</title>
+<meta name="description" content="TubbyPark conecta conductores con propietarios de cajones de estacionamiento privados en Puebla. Reserva, paga y estaciona cerca de tu destino.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfaf6;--surface:#ffffff;--text:#1d2a2a;--muted:#5b6b6a;--line:#e4e8e3;
+  --brand:#0f766e;--brand-ink:#ffffff;--accent:#f5b82e;--accent-ink:#2b2100;--soft:#e6f3f0;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1716;--surface:#172221;--text:#e8f0ee;--muted:#9bb0ad;--line:#27403d;
+  --brand:#2dd4bf;--brand-ink:#04211e;--accent:#f5b82e;--accent-ink:#2b2100;--soft:#16302d;}}
+:root[data-theme="dark"]{
+  --bg:#0f1716;--surface:#172221;--text:#e8f0ee;--muted:#9bb0ad;--line:#27403d;
+  --brand:#2dd4bf;--brand-ink:#04211e;--accent:#f5b82e;--accent-ink:#2b2100;--soft:#16302d;}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:Fredoka,Inter,system-ui,sans-serif;line-height:1.15;margin:0}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+.alt{background:var(--soft)}
+h2{font-size:clamp(1.7rem,4vw,2.3rem);margin-bottom:12px}
+.lead{color:var(--muted);max-width:620px;margin:0 0 36px}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:600;border:2px solid transparent;cursor:pointer;font:600 1rem Inter,sans-serif}
+.btn-main{background:var(--brand);color:var(--brand-ink)}
+.btn-alt{background:transparent;border-color:var(--brand);color:var(--brand)}
+.btn-gold{background:var(--accent);color:var(--accent-ink)}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.logo{font-size:1.5rem;font-weight:600;color:var(--brand);display:flex;align-items:center;gap:8px}
+.logo i{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--brand);color:var(--brand-ink);font:600 1.1rem Fredoka,sans-serif;font-style:normal}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-weight:500;font-size:.95rem}
+nav a:hover{color:var(--brand)}
+@media(max-width:760px){nav ul{display:none}}
+.hero{padding:64px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.tag{display:inline-block;background:var(--soft);color:var(--brand);font-weight:600;font-size:.85rem;padding:6px 14px;border-radius:999px;margin-bottom:16px}
+.hero h1{font-size:clamp(2.2rem,6vw,3.5rem);margin-bottom:16px}
+.hero h1 span{color:var(--brand)}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:520px;margin:0 0 26px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.search{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 12px 32px rgba(0,0,0,.08)}
+.search h3{font-size:1.15rem;margin-bottom:14px}
+.field{display:block;margin-bottom:12px;font-size:.8rem;color:var(--muted);font-weight:600}
+.field div{margin-top:4px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;color:var(--text);font-weight:500;font-size:.95rem;background:var(--bg)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.search .btn{width:100%;margin-top:6px;text-align:center}
+.note{font-size:.75rem;color:var(--muted);margin:10px 0 0;text-align:center}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h3{font-size:1.15rem;margin-bottom:8px}
+.card p{margin:0;color:var(--muted);font-size:.95rem}
+.num{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:600 1.1rem Fredoka,sans-serif;margin-bottom:12px}
+.ico{font-size:1.7rem;margin-bottom:8px}
+.two{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.two .card ul{margin:12px 0 18px;padding-left:20px;color:var(--muted);font-size:.95rem}
+.stats{display:flex;gap:36px;flex-wrap:wrap;margin-top:8px}
+.stats b{display:block;font:600 2.2rem Fredoka,sans-serif;color:var(--brand)}
+.stats span{color:var(--muted);font-size:.9rem}
+.mv{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-bottom:28px}
+.contact{max-width:520px}
+.contact input,.contact select{width:100%;padding:12px 14px;margin-bottom:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);font:1rem Inter,sans-serif}
+#msg{margin-top:12px;font-weight:600;color:var(--brand)}
+footer{border-top:1px solid var(--line);padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#inicio" class="logo"><i>T</i>TubbyPark</a>
+    <nav><ul>
+      <li><a href="#como">Cómo funciona</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#anfitriones">Anfitriones</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+    </ul></nav>
+    <a href="#contacto" class="btn btn-main" style="padding:9px 18px;font-size:.9rem">Únete</a>
+  </div>
+</header>
+
+<main>
+<!-- INICIO -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <span class="tag">📍 Piloto en Puebla</span>
+      <h1>Estaciona cerca, <span>paga menos.</span></h1>
+      <p>TubbyPark conecta conductores con propietarios que tienen un cajón de estacionamiento libre durante ciertas horas. Reserva en línea, de forma segura y a un mejor precio.</p>
+      <div class="cta">
+        <a href="#contacto" class="btn btn-main">Buscar estacionamiento</a>
+        <a href="#anfitriones" class="btn btn-alt">Quiero rentar mi cajón</a>
+      </div>
+    </div>
+    <div class="search" aria-label="Vista previa de búsqueda (demostración)">
+      <h3>Encuentra tu lugar</h3>
+      <label class="field">¿A dónde vas?<div>Ej. zona universitaria, Puebla</div></label>
+      <div class="row">
+        <label class="field">Entrada<div>Fecha y hora</div></label>
+        <label class="field">Salida<div>Fecha y hora</div></label>
+      </div>
+      <a href="#contacto" class="btn btn-gold">Ver disponibilidad</a>
+      <p class="note">Vista de ejemplo. La búsqueda real llegará en la siguiente etapa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="alt" id="como">
+  <div class="wrap">
+    <h2>Así de fácil funciona</h2>
+    <p class="lead">Un marketplace entre personas: tú reservas, el anfitrión comparte su espacio y la plataforma cuida la confianza.</p>
+    <div class="grid">
+      <div class="card"><div class="num">1</div><h3>Busca</h3><p>Explora el mapa y compara distancia, tarifa, horarios y tipo de acceso de cada cajón.</p></div>
+      <div class="card"><div class="num">2</div><h3>Reserva y paga</h3><p>Elige fecha, hora y tipo de vehículo. La reserva se confirma después del pago en línea.</p></div>
+      <div class="card"><div class="num">3</div><h3>Estaciona</h3><p>Recibe tu pase digital con código QR e instrucciones de entrada, y al final califica la experiencia.</p></div>
+    </div>
+    <div class="stats">
+      <div><b>hasta 40%</b><span>de ahorro frente a estacionamientos comerciales</span></div>
+      <div><b>100%</b><span>de reservas previas y espacios monitoreados</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="wrap">
+    <h2>Lo que ofrece la plataforma</h2>
+    <p class="lead">Seis servicios pensados para conductores y anfitriones.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">🗺️</div><h3>Búsqueda geolocalizada</h3><p>Mapa con ubicación aproximada, distancia, tarifa y características del cajón.</p></div>
+      <div class="card"><div class="ico">🕒</div><h3>Reserva temporal</h3><p>Por horas, por jornada laboral o para una visita puntual.</p></div>
+      <div class="card"><div class="ico">🏠</div><h3>Publicación para anfitriones</h3><p>Registro, fotografías, medidas, horarios disponibles y reglas de acceso.</p></div>
+      <div class="card"><div class="ico">💳</div><h3>Pagos y comprobantes</h3><p>Pago digital con desglose de precio y comisión, sin costos ocultos.</p></div>
+      <div class="card"><div class="ico">🎟️</div><h3>Pase digital</h3><p>Código QR o de reserva con instrucciones de entrada.</p></div>
+      <div class="card"><div class="ico">⭐</div><h3>Calificaciones y soporte</h3><p>Evaluación entre ambas partes y atención ante cancelaciones, daños o problemas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ANFITRIONES / CONDUCTORES -->
+<section class="alt" id="anfitriones">
+  <div class="wrap">
+    <h2>Para conductores y anfitriones</h2>
+    <p class="lead">Dos lados de la misma comunidad.</p>
+    <div class="two">
+      <div class="card">
+        <h3>🚗 Soy conductor</h3>
+        <ul><li>Estaciona cerca de tu trabajo, escuela o destino.</li><li>Reserva con anticipación y ahorra tiempo.</li><li>Espacios verificados y protegidos.</li></ul>
+        <a href="#contacto" class="btn btn-main">Quiero estacionar</a>
+      </div>
+      <div class="card">
+        <h3>🔑 Tengo un cajón libre</h3>
+        <ul><li>Genera ingresos con un espacio que no usas.</li><li>Tú defines horarios, reglas y quién entra.</li><li>Publicar es rápido y sencillo.</li></ul>
+        <a href="#contacto" class="btn btn-gold">Quiero rentar mi cajón</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="wrap">
+    <h2>Sobre TubbyPark</h2>
+    <p class="lead">Una plataforma de economía colaborativa que aprovecha los espacios privados desocupados de la ciudad.</p>
+    <div class="mv">
+      <div class="card"><h3>Misión</h3><p>Proporcionar acceso a estacionamientos seguros y económicos conectando a conductores con propietarios de espacios privados mediante una plataforma digital colaborativa para publicar, buscar, reservar y pagar cajones en tiempo real.</p></div>
+      <div class="card"><h3>Visión</h3><p>Consolidar a TubbyPark en 2036 como la plataforma líder de estacionamiento colaborativo en Puebla, mejorando la movilidad urbana y optimizando el uso del espacio en las zonas de mayor demanda.</p></div>
+    </div>
+    <div class="grid">
+      <div class="card"><h3>🛡️ Confianza y seguridad</h3><p>Verificación de usuarios, protección y evaluaciones continuas.</p></div>
+      <div class="card"><h3>🌱 Sustentabilidad</h3><p>Menos recorridos buscando lugar, menor huella de carbono.</p></div>
+      <div class="card"><h3>🤝 Colaboración</h3><p>Modelo entre personas con beneficios mutuos.</p></div>
+      <div class="card"><h3>💡 Innovación y accesibilidad</h3><p>Tecnología intuitiva y al alcance de todos.</p></div>
+      <div class="card"><h3>🔍 Transparencia</h3><p>Tarifas justas y calificaciones públicas.</p></div>
+      <div class="card"><h3>🎧 Orientación al cliente</h3><p>Soporte oportuno y continuo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="alt" id="contacto">
+  <div class="wrap">
+    <h2>Sé de los primeros</h2>
+    <p class="lead">Déjanos tus datos y te avisamos cuando llegue el piloto en Puebla.</p>
+    <div class="contact">
+      <input type="text" id="n" placeholder="Nombre" aria-label="Nombre">
+      <input type="email" id="e" placeholder="Correo electrónico" aria-label="Correo electrónico">
+      <select id="r" aria-label="Soy"><option>Soy conductor</option><option>Soy propietario / anfitrión</option></select>
+      <button class="btn btn-main" id="send" type="button">Quiero más información</button>
+      <div id="msg" role="status"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b style="color:var(--brand)">TubbyPark</b> · Estacionamiento colaborativo · Puebla, México</span>
+    <span>Proyecto de Negocios en Línea · Versión boceto</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('send').addEventListener('click',function(){
+  var e=document.getElementById('e').value.trim(),m=document.getElementById('msg');
+  m.textContent=/^\S+@\S+\.\S+$/.test(e)?'¡Gracias! Esta es una demostración: el registro real se conectará más adelante.':'Escribe un correo válido para continuar.';
+});
+</script>
+</body>
+</html>
